@@ -7,6 +7,7 @@ import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware';
 import authMiddleware from '@/middlewares/auth.middleware';
 import formidable from 'express-formidable'
+import { IdParams } from '@/dtos/ID_Parms';
 class UsersRoute implements Routes {
   public path = '/api/users';
   public router = Router();
@@ -33,14 +34,14 @@ class UsersRoute implements Routes {
 
 
     this.router.get(`${this.path}`, authMiddleware,adminMiddleware,this.usersController.getUsers);
-    this.router.get(`${this.path}/:id`, authMiddleware,adminMiddleware,this.usersController.getUserById);
+    this.router.get(`${this.path}/:id`, authMiddleware,adminMiddleware,validationMiddleware(IdParams, 'params'), this.usersController.getUserById);
 
     this.router.post(`${this.path}/uploadimage`, authMiddleware,adminMiddleware,formidable(),this.usersController.uploadimage);
     this.router.post(`${this.path}/removeimage`, authMiddleware,adminMiddleware,this.usersController.removeimage);
     this.router.post(`${this.path}/addToCart`, authMiddleware,this.usersController.addToCart);
     this.router.post(`${this.path}/removeFromCart`, authMiddleware,this.usersController.removeFromCart);
     this.router.post(`${this.path}/successBuy`, authMiddleware,this.usersController.successBuy);
-    this.router.post(`${this.path}/update_profile`, authMiddleware,this.usersController.updateUser);
+    this.router.put(`${this.path}/update_profile`, authMiddleware,this.usersController.updateUser);
 
 
 

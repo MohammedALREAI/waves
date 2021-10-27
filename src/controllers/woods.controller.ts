@@ -1,19 +1,13 @@
 import { UpdateWoodDto } from './../dtos/createWood.dto';
 import { logger } from '@/utils/logger';
-import { uploadImage } from '@utils/util';
 import { RequestWithUser } from '../interfaces/auth.interface';
 import { NextFunction, Request, Response } from 'express';
-import { CreateUserDto } from '@dtos/users.dto';
-import { User } from '@interfaces/user.interface';
-import  cloudinary  from 'cloudinary'
-import userModel from '@/models/users.model';
-import {  Types } from 'mongoose';
-import ProductModel from '@/models/Product.model';
-import paymentModel from '@/models/payment.model';
+
+
 import WoodService from '@/services/wood.service';
 import { Wood } from '@/interfaces/Wood.interface';
 
-class UsersController {
+class WoodController {
   public readonly woodService = new WoodService();
   private readonly logger = logger;
 
@@ -113,4 +107,4 @@ class UsersController {
 
 
 
-export  default UsersController;
+export  default WoodController;
